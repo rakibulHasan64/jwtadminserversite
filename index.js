@@ -1,9 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-
 const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -24,7 +22,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
     console.log("✅ Connected to MongoDB");
     const db = client.db("Cars");
     const carsCollection = db.collection("cars");
@@ -156,7 +154,7 @@ app.get("/available-cars", async (req, res) => {
 
 
 
-  
+
  
 
 
@@ -164,6 +162,10 @@ app.get("/available-cars", async (req, res) => {
     console.error("❌ MongoDB Connection Error:", err);
   }
 }
+// Home route
+app.get("/", (req, res) => {
+  res.send("🚗 Car Rental Server is Running Successfully!");
+});
 
 run();
 
